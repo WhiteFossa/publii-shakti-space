@@ -1,0 +1,17 @@
+{
+  "partials": {
+
+    "sidebar": {
+      "selectedPosts": "Посты по тегу:",
+      "featuredPosts": "Избранные посты:",
+      "authors": "Авторы:"
+    }
+  },
+
+  "post": {
+    "publishedBy": "Автор:",
+    "lastUpdatedDate": "Обновлено",
+    "previousPost": "Предыдущий",
+    "nextPost": "Следующий"
+  }
+}

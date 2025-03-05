@@ -1,7 +1,7 @@
 {
-    "name": "Blank",
-    "version": "2.0.0.0",
-    "author": "TidyCustoms <https://tidycustoms.net/>",
+    "name": "publii-shakti-space",
+    "version": "0.0.0.1",
+    "author": "Shakti <https://github.com/shantshaktilucidia>",
     "renderer": {
         "relatedPostsNumber": 3,
         "renderRelatedPosts": true,
