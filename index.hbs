@@ -1,89 +1,103 @@
 {{! Front page; this file renders a front page with a list of the latest posts }}
 {{> head}}
 {{> navbar}}
-<main>
-    {{! loop that generates a list of posts }}
-    {{#each posts}}
-        <article class="bordered-area">
 
-            {{! featured image }}
-            {{#featuredImage}}
-                {{! checks if an image exists }}
-                {{#if url}}
-                    <figure>
+<div class="page-main-flex">
+
+    <div class="left-sidebar-section">
+        <!-- Left placeholder -->
+    </div>
+
+    <div class="main-section">
+
+            {{! loop that generates a list of posts }}
+            {{#each posts}}
+                <article class="post">
+
+                    {{! featured image }}
+                    {{#featuredImage}}
+                    {{! checks if an image exists }}
+                        {{#if url}}
+                            <figure>
+                                <img
+                                    src="{{url}}"
+                                    {{! checks if the Responsive Images option (located in Site Settings -> Website Speed) is enabled  }}
+                                    {{#if @config.site.responsiveImages}}
+                                        {{responsiveImageAttributes 'featuredImage' srcset sizes}}
+                                    {{/if}}
+                                    {{! generates a native loading attribute; if the Media Lazy Load option (located in Site Settings -> Website Speed) is disabled, the loading attribute is not generated  }}
+                                    {{lazyload "lazy"}}
+                                    height="{{height}}"
+                                    width="{{width}}"
+                                    alt="{{alt}}">
+
+                                {{! checks if a caption and credits exist  }}
+                                {{#checkIfAny caption credits}}
+                                    <figcaption>
+                                        {{caption}}
+                                        {{credits}}
+                                    </figcaption>
+                                {{/checkIfAny}}
+                                {{! /checks if a caption and credits exist  }}
+
+                            </figure>
+                        {{/if}}
+                    {{! /checks if an image exists }}
+                    {{/featuredImage}}
+                    {{! /featured image }}
+
+                    {{! post title }}
+                    <h2>
+                        <a href="{{url}}">{{title}}</a>
+                    </h2>
+                    {{! /post title }}
+
+                    {{! post creation date }}
+                    <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                        {{date createdAt}}
+                    </time>
+                    {{! /post creation date }}
+
+                    {{! post author }}
+                    {{#author}}
                         <img
-                            src="{{url}}"
-                            {{! checks if the Responsive Images option (located in Site Settings -> Website Speed) is enabled  }}
-                            {{#if @config.site.responsiveImages}}
-                                {{responsiveImageAttributes 'featuredImage' srcset sizes}}
-                            {{/if}}
-                            {{! generates a native loading attribute; if the Media Lazy Load option (located in Site Settings -> Website Speed) is disabled, the loading attribute is not generated  }}
+                            class="author-avatar"
+                            src="{{avatarImage.url}}"
                             {{lazyload "lazy"}}
-                            height="{{height}}"
-                            width="{{width}}"
-                            alt="{{alt}}">
+                            alt="{{avatarImage.alt}}"
+                            height="{{avatarImage.height}}"
+                            width="{{avatarImage.width}}">
+                        <a href="{{url}}">{{name}}</a>
+                    {{/author}}
+                    {{! /post author }}
 
-                            {{! checks if a caption and credits exist  }}
-                            {{#checkIfAny caption credits}}
-                                <figcaption>
-                                    {{caption}}
-                                    {{credits}}
-                                </figcaption>                      
-                            {{/checkIfAny}}
-                            {{! /checks if a caption and credits exist  }}
+                    {{! main tag - if no main tag is selected, then the first tag in the list of all tags will be used }}
+                    {{#if mainTag}}
+                        <a href="{{mainTag.url}}">{{mainTag.name}}</a>
+                    {{/if}}
+                    {{! /main tag }}
 
-                     </figure>
-                {{/if}}
-                {{! /checks if an image exists }}
-            {{/featuredImage}}
-            {{! /featured image }}
+                    {{! post excerpt - the Custom excerpt is generated when the Read More button is used when editing a post }}
+                    {{#if hasCustomExcerpt}}
+                        {{{ excerpt }}}
+                    {{else}}
+                        <p>{{{ excerpt }}}</p>
+                    {{/if}}
+                    {{! /post excerpt }}
 
-            {{! post title }}
-            <h2>
-                <a href="{{url}}">{{title}}</a>
-            </h2>
-            {{! /post title }}
+                </article>
+            {{/each}}
+            {{! /loop that generates list of posts }}
 
-            {{! post creation date }}
-            <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
-                {{date createdAt}}
-            </time>
-            {{! /post creation date }}
 
-            {{! post author }}
-            {{#author}}
-                <img 
-                    src="{{avatarImage.url}}" 
-                    {{lazyload "lazy"}} 
-                    alt="{{avatarImage.alt}}" 
-                    height="{{avatarImage.height}}"  
-                    width="{{avatarImage.width}}">
-                <a href="{{url}}">{{name}}</a>
-            {{/author}}
-            {{! /post author }}
+    </div>
 
-            {{! main tag - if no main tag is selected, then the first tag in the list of all tags will be used }}
-            {{#if mainTag}}
-                <a href="{{mainTag.url}}">{{mainTag.name}}</a>
-            {{/if}}
-            {{! /main tag }}
+    <div class="right-sidebar-section">
+       {{> sidebar}}
+    </div>
 
-            {{! post excerpt - the Custom excerpt is generated when the Read More button is used when editing a post }}
-            {{#if hasCustomExcerpt}}
-                {{{ excerpt }}}
-            {{else}}
-                <p>{{{ excerpt }}}</p>
-            {{/if}}
-            {{! /post excerpt }}
+</div>
 
-        </article>
-    {{/each}}
-    {{! /loop that generates list of posts }}
-    
-</main>
-<aside>
-    {{> sidebar}}
-</aside>
 
 {{> pagination}}
 {{> footer}}
