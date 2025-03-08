@@ -1,6 +1,6 @@
 {{! Front page; this file renders a front page with a list of the latest posts }}
 {{> head}}
-{{> navbar}}
+{{> navbar-center}}
 
 <div class="page-main-flex">
 
@@ -47,43 +47,71 @@
                     {{! /featured image }}
 
                     {{! post title }}
-                    <h2>
+                    <h2 class="post-title no-margin centered-block selected-background">
                         <a href="{{url}}">{{title}}</a>
                     </h2>
                     {{! /post title }}
 
-                    {{! post creation date }}
-                    <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
-                        {{date createdAt}}
-                    </time>
-                    {{! /post creation date }}
+                    <!-- Post info -->
+                    <div class="post-info-container">
 
-                    {{! post author }}
-                    {{#author}}
-                        <img
-                            class="author-avatar"
-                            src="{{avatarImage.url}}"
-                            {{lazyload "lazy"}}
-                            alt="{{avatarImage.alt}}"
-                            height="{{avatarImage.height}}"
-                            width="{{avatarImage.width}}">
-                        <a href="{{url}}">{{name}}</a>
-                    {{/author}}
-                    {{! /post author }}
+                        <!-- Date -->
+                        <div class="post-info-date-container">
 
-                    {{! main tag - if no main tag is selected, then the first tag in the list of all tags will be used }}
-                    {{#if mainTag}}
-                        <a href="{{mainTag.url}}">{{mainTag.name}}</a>
-                    {{/if}}
-                    {{! /main tag }}
+                            <div class="post-info-date">
 
-                    {{! post excerpt - the Custom excerpt is generated when the Read More button is used when editing a post }}
-                    {{#if hasCustomExcerpt}}
-                        {{{ excerpt }}}
-                    {{else}}
-                        <p>{{{ excerpt }}}</p>
-                    {{/if}}
-                    {{! /post excerpt }}
+                                <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
+                                    {{date createdAt 'DD MMMM YYYY HH:mm:ss (UTCZ)' flase 'ru'}}
+                                </time>
+
+                            </div>
+
+                            <div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="post-info-main">
+
+                        </div>
+
+                        <!-- Author -->
+                        <div class="post-info-author">
+                            {{#author}}
+
+                                <h4 class="no-margin">
+                                    <a href="{{url}}">{{name}}</a>
+                                </h4>
+
+                                <img
+                                        class="author-avatar"
+                                        src="{{avatarImage.url}}"
+                                    {{lazyload "lazy"}}
+                                        alt="{{avatarImage.alt}}"
+                                        height="{{avatarImage.height}}"
+                                        width="{{avatarImage.width}}">
+                            {{/author}}
+                        </div>
+
+                    </div>
+
+                    <div class="post-content">
+                        {{! main tag - if no main tag is selected, then the first tag in the list of all tags will be used }}
+                        {{#if mainTag}}
+                            <a href="{{mainTag.url}}">{{mainTag.name}}</a>
+                        {{/if}}
+                        {{! /main tag }}
+
+                        {{! post excerpt - the Custom excerpt is generated when the Read More button is used when editing a post }}
+                        {{#if hasCustomExcerpt}}
+                            {{{ excerpt }}}
+                        {{else}}
+                            <p>{{{ excerpt }}}</p>
+                        {{/if}}
+                        {{! /post excerpt }}
+
+                    </div>
 
                 </article>
             {{/each}}

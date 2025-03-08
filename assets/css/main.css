@@ -7,15 +7,15 @@
 :root {
    --color-background-dark: hsl(240, 100%, 10%);
    --color-background-light: hsl(240, 100%, 15%);
-   --color-selected-background: hsl(240, 100%, 50%);
+
+   --color-background-selected-dark: hsl(240, 100%, 40%);
+   --color-background-selected-light: hsl(240, 100%, 50%);
 
    --color-text-main: hsl(240, 100%, 80%);
 
    --main-border-type: double;
    --main-border-width: 0.4rem;
    --main-border-color: hsl(230, 100%, 75%);
-   --main-border-radius: 1rem;
-   --main-border-padding: 1rem;
 
    --author-avatar-max-width: 5rem;
    --author-avatar-max-height: 5rem;
@@ -28,17 +28,25 @@
 
    --posts-gap: 1rem;
 
+   --border-radius-normal: 1rem;
+   --border-radius-borders-joins: 0.8rem;
+
    --sidebars-gap: 1rem;
    --sidebars-flex-width: 30%;
-   --sidebars-padding: 1rem;
 
    --margin-normal: 1rem;
+   --margin-body: 1rem;
+
+   --padding-small: 0.5rem;
+   --padding-normal: 1rem;
 
    --text-size-normal: 1rem;
-   --text-size-big: 3rem ;
+   --text-size-big: 3rem;
+
+   --header-padding-top: 0.1rem;
 }
 
-/*** Layout ***/
+/* Layout */
 body {
    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
    font-size: 1rem;
@@ -46,7 +54,7 @@ body {
    line-height: 1.6;
    color: var(--color-text-main);
 
-   /*** Striped background ***/
+   /* Striped background (common) */
    background: linear-gradient(
            to bottom,
            var(--color-background-dark),
@@ -56,12 +64,29 @@ body {
    );
 
    background-size: 100% 0.5rem;
+
+   margin: var(--margin-body);
+}
+
+/* Selected background */
+.selected-background {
+   background: linear-gradient(
+      to bottom,
+      var(--color-background-selected-dark),
+      var(--color-background-selected-dark) 50%,
+      var(--color-background-selected-light) 50%,
+      var(--color-background-selected-light)
+);
+
+   background-size: 100% 0.5rem;
 }
 
 img {
    height: auto;
    max-width: 100%;
    vertical-align: top;
+
+   border-radius: var(--border-radius-normal);
 }
 
 #related-posts > div {
@@ -95,6 +120,13 @@ img {
    text-align: center;
 }
 
+/* Centered block */
+.centered-block {
+   margin: auto;
+   width: 100%;
+   text-align: center;
+}
+
 /* No margin */
 .no-margin {
    margin: 0 !important;
@@ -115,27 +147,26 @@ img {
    margin-bottom: var(--margin-normal);
 }
 
-/* Selected background */
-.selected-background {
-   background-color: var(--color-selected-background);
-}
-
 /* Bordered area (post, for example) */
 .bordered-area {
    border: var(--main-border-width) var(--main-border-type) var(--main-border-color);
-   border-radius: var(--main-border-radius);
+   border-radius: var(--border-radius-normal);
 
-   padding-left: var(--main-border-padding);
-   padding-right: var(--main-border-padding);
+   padding-top: var(--padding-small);
+   padding-bottom: var(--padding-small);
+   padding-left: var(--padding-normal);
+   padding-right: var(--padding-normal);
 }
 
 /* Header begin */
 
 /* Put site header text inside*/
 .header-container {
-   margin: auto;
-   width: 100%;
-   text-align: center;
+   padding-bottom: var(--padding-normal);
+}
+
+.header-title {
+   padding-top: var(--header-padding-top);
 }
 
 /* Header end */
@@ -147,7 +178,6 @@ img {
 /* Left sidebar section */
 .left-sidebar-section {
    flex: var(--sidebars-flex-width);
-   padding-left: var(--sidebars-padding);
 
    width: 100%;
 }
@@ -155,16 +185,11 @@ img {
 /* Right sidebar section */
 .right-sidebar-section {
    flex: var(--sidebars-flex-width);
-   padding-right: var(--sidebars-padding);
 
    width: 100%;
 }
 
 .sidebar-area {
-   border: var(--main-border-width) var(--main-border-type) var(--main-border-color);
-   border-radius: var(--main-border-radius);
-
-   padding: var(--main-border-padding);
 }
 
 /* Sidebar (posts, right) */
@@ -187,13 +212,11 @@ img {
 
 /* One author */
 .author {
-   background-color: var(--color-selected-background);
 }
 
 /* Author avatar */
 .author-avatar {
    border: var(--main-border-width) var(--main-border-type) var(--main-border-color);
-   border-radius: var(--main-border-radius);
 
    max-width: var(--author-avatar-max-width);
    max-height: var(--author-avatar-max-height);
@@ -201,15 +224,92 @@ img {
 
 /* Authors end */
 
+/* Posts begin* /
+
 /* Post */
 .post {
    border: var(--main-border-width) var(--main-border-type) var(--main-border-color);
-   border-radius: var(--main-border-radius);
-
-   padding: var(--main-border-padding);
+   border-radius: var(--border-radius-normal);
 }
 
+/* Post title */
+.post-title {
+   border-bottom: var(--main-border-width) var(--main-border-type) var(--main-border-color);
 
+   border-top-left-radius: var(--border-radius-borders-joins);
+   border-top-right-radius: var(--border-radius-borders-joins);
+   border-bottom-left-radius: var(--border-radius-normal);
+   border-bottom-right-radius: var(--border-radius-normal);
+}
+
+/* Post content */
+.post-content {
+   padding-left: var(--padding-normal);
+   padding-right: var(--padding-normal);
+}
+
+/* Container for post information (date, author and so one) */
+.post-info-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+/* Publishing date container */
+.post-info-date-container {
+   flex: auto;
+}
+
+/* Publishing date */
+.post-info-date {
+   border-bottom: var(--main-border-width) var(--main-border-type) var(--main-border-color);
+   border-right: var(--main-border-width) var(--main-border-type) var(--main-border-color);
+
+   border-top-right-radius: var(--border-radius-normal);
+   border-bottom-right-radius: var(--border-radius-normal);
+   border-bottom-left-radius: var(--border-radius-normal);
+
+   width: max-content;
+
+   padding-left: var(--padding-normal);
+   padding-right: var(--padding-normal);
+
+   padding-top: var(--padding-small);
+   padding-bottom: var(--padding-small);
+
+   text-align: left;
+}
+
+/* Post info main part, mostly probably empty */
+.post-info-main {
+   flex: auto;
+
+   width: 100%
+}
+
+/* Author */
+.post-info-author {
+   flex: auto;
+
+   border-bottom: var(--main-border-width) var(--main-border-type) var(--main-border-color);
+   border-left: var(--main-border-width) var(--main-border-type) var(--main-border-color);
+
+   border-top-left-radius: var(--border-radius-normal);
+   border-bottom-left-radius: var(--border-radius-normal);
+   border-bottom-right-radius: var(--border-radius-normal);
+
+   width: max-content;
+
+   padding-left: var(--padding-normal);
+   padding-right: var(--padding-normal);
+
+   padding-top: var(--padding-small);
+   padding-bottom: var(--padding-small);
+
+   text-align: center;
+}
+
+/* Posts end */
 
 /* Links */
 a:link {
