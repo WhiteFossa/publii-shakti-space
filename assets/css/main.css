@@ -250,14 +250,11 @@ img {
 
 /* Container for post information (date, author and so one) */
 .post-info-container {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
 }
 
 /* Publishing date container */
 .post-info-date-container {
-   flex: auto;
+   float: left;
 }
 
 /* Publishing date */
@@ -278,18 +275,14 @@ img {
    padding-bottom: var(--padding-small);
 
    text-align: left;
-}
 
-/* Post info main part, mostly probably empty */
-.post-info-main {
-   flex: auto;
-
-   width: 100%
+   margin-right: var(--margin-normal);
+   margin-bottom: var(--margin-normal);
 }
 
 /* Author */
 .post-info-author {
-   flex: auto;
+   float: right;
 
    border-bottom: var(--main-border-width) var(--main-border-type) var(--main-border-color);
    border-left: var(--main-border-width) var(--main-border-type) var(--main-border-color);
@@ -307,6 +300,9 @@ img {
    padding-bottom: var(--padding-small);
 
    text-align: center;
+
+   margin-left: var(--margin-normal);
+   margin-bottom: var(--margin-normal);
 }
 
 /* Posts end */
