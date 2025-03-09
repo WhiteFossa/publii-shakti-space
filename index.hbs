@@ -12,7 +12,14 @@
 
             {{! loop that generates a list of posts }}
             {{#each posts}}
-                <article class="post">
+
+                {{#if isFeatured}}
+                    <!-- Featured post -->
+                    <article class="post background-semiselected text-selected">
+                {{else}}
+                    <!-- Ordinary post -->
+                    <article class="post">
+                {{/if}}
 
                     {{! featured image }}
                     {{#featuredImage}}
@@ -47,13 +54,13 @@
                     {{! /featured image }}
 
                     {{! post title }}
-                    <h2 class="post-title no-margin centered-block selected-background">
+                    <h2 class="post-title centered-block background-selected">
                         <a href="{{url}}">{{title}}</a>
                     </h2>
                     {{! /post title }}
 
                     <!-- Post info -->
-                    <div class="post-info-container">
+                    <div class="post-info-container text-force-normal">
 
                         <!-- Date -->
                         <div class="post-info-date-container">
@@ -72,7 +79,7 @@
                         <div class="post-info-author">
                             {{#author}}
 
-                                <h4 class="no-margin">
+                                <h4>
                                     <a href="{{url}}">{{name}}</a>
                                 </h4>
 

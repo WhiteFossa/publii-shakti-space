@@ -11,7 +11,11 @@
    --color-background-selected-dark: hsl(240, 100%, 40%);
    --color-background-selected-light: hsl(240, 100%, 50%);
 
+   --color-background-semiselected-dark: hsl(240, 100%, 30%);
+   --color-background-semiselected-light: hsl(240, 100%, 35%);
+
    --color-text-main: hsl(240, 100%, 80%);
+   --color-text-selected: hsl(240, 100%, 90%);
 
    --main-border-type: double;
    --main-border-width: 0.4rem;
@@ -68,8 +72,21 @@ body {
    margin: var(--margin-body);
 }
 
+/* Semi-selected background (use it for featured posts and so on) */
+.background-semiselected {
+   background: linear-gradient(
+           to bottom,
+           var(--color-background-semiselected-dark),
+           var(--color-background-semiselected-dark) 50%,
+           var(--color-background-semiselected-light) 50%,
+           var(--color-background-semiselected-light)
+   );
+
+   background-size: 100% 0.5rem;
+}
+
 /* Selected background */
-.selected-background {
+.background-selected {
    background: linear-gradient(
       to bottom,
       var(--color-background-selected-dark),
@@ -79,6 +96,17 @@ body {
 );
 
    background-size: 100% 0.5rem;
+}
+
+/* Selected text */
+.text-selected * {
+   color: var(--color-text-selected) !important;
+}
+
+/* Force text to look ordinarily */
+.text-force-normal {
+   color: var(--color-text-main) !important;
+   font-weight: unset !important;
 }
 
 img {
@@ -93,6 +121,43 @@ img {
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    grid-gap: 5%;
+}
+
+/* Headers (H1 and so on) */
+
+h1 {
+   margin: 0;
+}
+
+h2 {
+   margin: 0;
+}
+
+h3 {
+   margin: 0;
+}
+
+h4 {
+   margin: 0;
+}
+
+h5 {
+   margin: 0;
+}
+
+h6 {
+   margin: 0;
+}
+
+/* End of headers */
+
+ul {
+   margin:  0;
+
+   padding-top: 0;
+   padding-bottom: 0;
+   padding-left: var(--padding-normal);
+   padding-right: 0;
 }
 
 /* Main page flex */

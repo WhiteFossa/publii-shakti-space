@@ -23,7 +23,7 @@
         <section class="sidebar-area bordered-area">
             <h3>{{ translate 'partials.sidebar.featuredPosts' }}</h3>
 
-            <ol class="featured-posts__list">
+            <ul class="featured-posts__list">
 
                 {{! loop generating a list of featured posts}}
                 {{#each featuredPosts}}
@@ -33,7 +33,7 @@
                 {{/each}}
                 {{! /loop generating a list of featured posts}}
 
-            </ol>
+            </ul>
         </section>
     {{/if}}
     {{! /check if featured posts exists}}
@@ -44,7 +44,7 @@
     {{#if @config.custom.authors}}
         <section class="sidebar-area bordered-area">
             <!-- Word "authors" -->
-            <h3 class="no-margin">
+            <h3>
                 {{ translate 'partials.sidebar.authors' }}
             </h3>
 
@@ -55,11 +55,11 @@
                     {{#checkIf @index '<' @config.custom.authorsNumber}} {{! the number of authors is specified in the theme option (located in Theme -> Sidebar)}}
 
                         <!-- Author -->
-                        <div class="bordered-area centered-text author selected-background bordered-area">
+                        <div class="bordered-area centered-text author background-selected bordered-area">
 
                             <!-- Author name -->
                             <div>
-                                <h4 class="no-margin"><a href="{{url}}">{{name}} ({{postsNumber}})</a></h4>
+                                <h4><a href="{{url}}">{{name}} ({{postsNumber}})</a></h4>
                             </div>
 
                             <!-- Author avatar -->
